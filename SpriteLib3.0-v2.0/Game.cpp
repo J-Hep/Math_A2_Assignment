@@ -37,7 +37,9 @@ void Game::InitGame()
 
 	//Baked in scenes, can't remove.
 	m_scenes.push_back(new FirstCreation("FIRST SCENE!!!!"));
-	m_scenes.push_back(new PhysicsPlayground("PHYSICS PLAYGROUND TIEM!!!"));
+
+	//Main game scene
+	m_scenes.push_back(new PhysicsPlayground("Is this a game or what?"));
 
 	//Game scene
 	//m_scenes.push_back(new AnimationSpritePlayground("Animation TIEM!!!!"));

@@ -80,8 +80,8 @@ void PhysicsPlayground::InitScene(float windowWidth, float windowHeight)
 		ECS::AttachComponent<CanJump>(entity);
 
 		//Sets up the components
-		std::string fileName = "LinkStandby.png";
-		ECS::GetComponent<Sprite>(entity).LoadSprite(fileName, 40, 30);
+		std::string fileName = "WhiteSquare.png";
+		ECS::GetComponent<Sprite>(entity).LoadSprite(fileName, 30, 30);
 		ECS::GetComponent<Sprite>(entity).SetTransparency(1.f);
 		ECS::GetComponent<Transform>(entity).SetPosition(vec3(0.f, 30.f, 2.f));
 
@@ -118,7 +118,7 @@ void PhysicsPlayground::InitScene(float windowWidth, float windowHeight)
 		ECS::AttachComponent<PhysicsBody>(entity);
 
 		//Sets up components
-		std::string fileName = "boxSprite.jpg";
+		std::string fileName = "GraySquare.png";
 		ECS::GetComponent<Sprite>(entity).LoadSprite(fileName, 150, 10);
 		ECS::GetComponent<Transform>(entity).SetPosition(vec3(30.f, -20.f, 2.f));
 
@@ -151,7 +151,7 @@ void PhysicsPlayground::InitScene(float windowWidth, float windowHeight)
 		ECS::AttachComponent<PhysicsBody>(entity);
 
 		//Sets up components
-		std::string fileName = "boxSprite.jpg";
+		std::string fileName = "GraySquare.png";
 		ECS::GetComponent<Sprite>(entity).LoadSprite(fileName, 80, 10);
 		ECS::GetComponent<Transform>(entity).SetPosition(vec3(30.f, -20.f, 2.f));
 
@@ -184,7 +184,7 @@ void PhysicsPlayground::InitScene(float windowWidth, float windowHeight)
 		ECS::AttachComponent<PhysicsBody>(entity);
 
 		//Sets up components
-		std::string fileName = "boxSprite.jpg";
+		std::string fileName = "GraySquare.png";
 		ECS::GetComponent<Sprite>(entity).LoadSprite(fileName, 150, 10);
 		ECS::GetComponent<Transform>(entity).SetPosition(vec3(30.f, -20.f, 2.f));
 
@@ -216,7 +216,7 @@ void PhysicsPlayground::InitScene(float windowWidth, float windowHeight)
 		ECS::AttachComponent<PhysicsBody>(entity);
 
 		//Sets up components
-		std::string fileName = "boxSprite.jpg";
+		std::string fileName = "GraySquare.png";
 		ECS::GetComponent<Sprite>(entity).LoadSprite(fileName, 50, 15);
 		ECS::GetComponent<Transform>(entity).SetPosition(vec3(30.f, -20.f, 2.f));
 
@@ -306,6 +306,22 @@ void PhysicsPlayground::InitScene(float windowWidth, float windowHeight)
 		tempPhsBody.SetColor(vec4(1.f, 0.f, 0.f, 0.3f));
 	*/}
 
+	//Setup Background
+	{
+		//Create entity
+		auto entity = ECS::CreateEntity();
+
+		//Add components
+		ECS::AttachComponent<Sprite>(entity);
+		ECS::AttachComponent<Transform>(entity);
+
+		//Set up component
+		float backgroundScale = 5; // Scales background, default 1 [N]
+		std::string fileName = "LightestGraySquare.png";
+		ECS::GetComponent<Sprite>(entity).LoadSprite(fileName, 700 * backgroundScale, 400 * backgroundScale);
+		ECS::GetComponent<Transform>(entity).SetPosition(vec3(-150.f, 40.f, 0.f));
+	}
+
 	ECS::GetComponent<HorizontalScroll>(MainEntities::MainCamera()).SetFocus(&ECS::GetComponent<Transform>(MainEntities::MainPlayer()));
 	ECS::GetComponent<VerticalScroll>(MainEntities::MainCamera()).SetFocus(&ECS::GetComponent<Transform>(MainEntities::MainPlayer()));
 }
@@ -353,10 +369,10 @@ void PhysicsPlayground::KeyboardDown()
 	auto& player = ECS::GetComponent<PhysicsBody>(MainEntities::MainPlayer());
 	auto& canJump = ECS::GetComponent<CanJump>(MainEntities::MainPlayer());
 
-	if (Input::GetKeyDown(Key::T))
+	/*if (Input::GetKeyDown(Key::T))   The p key does this automatically
 	{
 		PhysicsBody::SetDraw(!PhysicsBody::GetDraw());
-	}
+	}*/
 	if (canJump.m_canJump)
 	{
 		if (Input::GetKeyDown(Key::Space))
